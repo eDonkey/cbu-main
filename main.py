@@ -134,7 +134,7 @@ def decodificar_cbu(cbu):
         }
     }
 
-HHTML_TEMPLATE = """
+HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html>
 <head>
