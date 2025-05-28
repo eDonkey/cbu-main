@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify, render_template_string
+from flask_restx import Api, Resource, fields
 import json
 
 app = Flask(__name__)
+api = Api(app, title="Decodificador de CBU API", description="API para decodificar CBU", doc="/api/docs")
 
 CODIGOS_ENTIDAD = {
     '005': 'The Royal Bank of Scotland N.V.',
@@ -187,16 +189,25 @@ def index():
             error = str(e)
     return render_template_string(HTML_TEMPLATE, error=error, resultado=resultado)
 
-@app.route('/api/decodificar', methods=['POST'])
-def api_decodificar():
-    data = request.get_json()
-    if not data or 'cbu' not in data:
-        return jsonify({"error": "Se requiere el campo 'cbu'"}), 400
-    try:
-        resultado = decodificar_cbu(data['cbu'])
-        return jsonify(resultado)
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
+# Swagger Model for API Input
+cbu_model = api.model('CBU', {
+    'cbu': fields.String(required=True, description='CBU de 22 dígitos')
+})
+
+@api.route('/api/decodificar')
+class DecodificarCBU(Resource):
+    @api.expect(cbu_model)
+    @api.response(200, 'CBU decodificado correctamente')
+    @api.response(400, 'Error en la decodificación')
+    def post(self):
+        data = request.get_json()
+        if not data or 'cbu' not in data:
+            return {"error": "Se requiere el campo 'cbu'"}, 400
+        try:
+            resultado = decodificar_cbu(data['cbu'])
+            return resultado, 200
+        except ValueError as e:
+            return {"error": str(e)}, 400
 
 if __name__ == '__main__':
     app.run(debug=False)
