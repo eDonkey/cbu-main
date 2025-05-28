@@ -149,6 +149,8 @@ HTML_TEMPLATE = """
         .result { margin-top: 20px; }
         .error { color: red; }
         pre { background: #f1f1f1; padding: 10px; border-radius: 5px; }
+        .alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 5px; }
+        .alert-info { background-color: #e9f7fd; border-color: #bce8f1; color: #31708f; }
         footer { text-align: center; margin-top: 20px; font-size: 0.9em; color: #555; }
         footer a { color: #007bff; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
@@ -157,10 +159,21 @@ HTML_TEMPLATE = """
 <body>
     <div class="container">
         <h1>Decodificador de CBU</h1>
-        <h3>ATENCION: Esta herramienta es solo para fines educativos y no debe usarse para realizar transacciones financieras.</h3>
-        <h3>ATENCION 2: Esta herramienta no puede utilizarse con billeteras virtuales (CVU) como Mercado Pago, Ualá, etc.</h3>
-        <h3>ATENCION 3: Esta herramienta no puede utilizarse con cuentas de criptomonedas.</h3>
-        <h3>ATENCION 4: Esta herramienta no puede utilizarse con cuentas de bancos extranjeros (No Argentinos).</h3>
+        <div class="alert alert-info">
+            <strong>ATENCIÓN:</strong> Esta herramienta es solo para fines educativos y no debe usarse para realizar transacciones financieras.
+        </div>
+        <div class="alert alert-info">
+            <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con billeteras virtuales (CVU) como Mercado Pago, Ualá, etc.
+        </div>
+        <div class="alert alert-info">
+            <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con cuentas de criptomonedas.
+        </div>
+        <div class="alert alert-info">
+            <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con cuentas de bancos extranjeros (No Argentinos).
+        </div>
+        <div class="alert alert-info">
+            <strong>ATENCIÓN:</strong> Este sitio no utiliza cookies ni guarda ningún dato. Es un sitio de solo lectura.
+        </div>
         <form method="POST">
             <input type="text" name="cbu" placeholder="Ingrese su CBU" required maxlength="22">
             <button type="submit">Decodificar</button>
