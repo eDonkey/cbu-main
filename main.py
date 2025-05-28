@@ -134,7 +134,7 @@ def decodificar_cbu(cbu):
         }
     }
 
-HTML_TEMPLATE = """
+HHTML_TEMPLATE = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,6 +148,9 @@ HTML_TEMPLATE = """
         .result { margin-top: 20px; }
         .error { color: red; }
         pre { background: #f1f1f1; padding: 10px; border-radius: 5px; }
+        footer { text-align: center; margin-top: 20px; font-size: 0.9em; color: #555; }
+        footer a { color: #007bff; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -164,6 +167,9 @@ HTML_TEMPLATE = """
         {% if error %}<div class="error">{{ error }}</div>{% endif %}
         {% if resultado %}<div class="result"><h2>Resultado</h2><pre>{{ resultado }}</pre></div>{% endif %}
     </div>
+    <footer>
+        <p>Copyleft &copy; 2025 - Este proyecto es de uso libre. <a href="/api/docs">API Swagger</a></p>
+    </footer>
 </body>
 </html>
 """
