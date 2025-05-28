@@ -148,7 +148,10 @@ HTML_TEMPLATE = """
         button { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
         .result { margin-top: 20px; }
         .error { color: red; }
-        pre { background: #f1f1f1; padding: 10px; border-radius: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table, th, td { border: 1px solid #ccc; }
+        th, td { padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
         .alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 5px; }
         .alert-info { background-color: #e9f7fd; border-color: #bce8f1; color: #31708f; }
         footer { text-align: center; margin-top: 20px; font-size: 0.9em; color: #555; }
@@ -162,7 +165,7 @@ HTML_TEMPLATE = """
         <div class="alert alert-info">
             <strong>ATENCIÓN:</strong> Esta herramienta es solo para fines educativos y no debe usarse para realizar transacciones financieras.
         </div>
-        <div class="alert alert-info">
+         <div class="alert alert-info">
             <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con billeteras virtuales (CVU) como Mercado Pago, Ualá, etc.
         </div>
         <div class="alert alert-info">
@@ -178,8 +181,40 @@ HTML_TEMPLATE = """
             <input type="text" name="cbu" placeholder="Ingrese su CBU" required maxlength="22">
             <button type="submit">Decodificar</button>
         </form>
-        {% if error %}<div class="error">{{ error }}</div>{% endif %}
-        {% if resultado %}<div class="result"><h2>Resultado</h2><pre>{{ resultado }}</pre></div>{% endif %}
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        {% if resultado %}
+        <div class="result">
+            <h2>Resultado</h2>
+            <table>
+                <tr>
+                    <th>Campo</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Entidad</td>
+                    <td>{{ resultado['entidad']['nombre'] }} ({{ resultado['entidad']['codigo'] }})</td>
+                </tr>
+                <tr>
+                    <td>Sucursal</td>
+                    <td>{{ resultado['sucursal'] }}</td>
+                </tr>
+                <tr>
+                    <td>Cuenta</td>
+                    <td>{{ resultado['cuenta'] }}</td>
+                </tr>
+                <tr>
+                    <td>Dígito Verificador Bloque 1</td>
+                    <td>{{ resultado['digitos_verificadores']['bloque1'] }}</td>
+                </tr>
+                <tr>
+                    <td>Dígito Verificador Bloque 2</td>
+                    <td>{{ resultado['digitos_verificadores']['bloque2'] }}</td>
+                </tr>
+            </table>
+        </div>
+        {% endif %}
     </div>
     <footer>
         <p>Copyleft &copy; 2025 - Este proyecto es de uso libre. <a href="https://github.com/eDonkey/cbu-main">Github Readme</a></p>
@@ -195,8 +230,7 @@ def index():
     if request.method == 'POST':
         cbu = request.form.get('cbu', '').strip()
         try:
-            data = decodificar_cbu(cbu)
-            resultado = json.dumps(data, indent=4, ensure_ascii=False)
+            resultado = decodificar_cbu(cbu)  # Pass the dictionary directly
         except ValueError as e:
             error = str(e)
     return render_template_string(HTML_TEMPLATE, error=error, resultado=resultado)
