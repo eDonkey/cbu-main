@@ -176,14 +176,82 @@ HTML_TEMPLATE = """
         table, th, td { border: 1px solid #ccc; }
         th, td { padding: 10px; text-align: left; }
         th { background-color: #f4f4f4; }
-        .alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 5px; width: 90%; max-width: 300px; position: relative; margin-left: auto; margin-right: auto; z-index: 0; }
-        .alert-info { background-color: #fff8b5; border-color: #f5e79e; color: #856404; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transform: none; }
-        .alert-left, .alert-right, .alert-left2, .alert-right2 { top: auto; left: auto; right: auto; transform: none; }
-        @media (min-width: 768px) {
-            .alert-left { margin-left: 10%; }
-            .alert-right { margin-right: 10%; }
-            .alert-left2 { margin-left: 15%; }
-            .alert-right2 { margin-right: 15%; }
+.alert {
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    width: 200px; /* Tamaño fijo para las alertas */
+    background-color: #fff8b5;
+    border-color: #f5e79e;
+    color: #856404;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Posiciona las alertas fuera del flujo normal */
+    z-index: 10; /* Asegura que estén por encima del contenido */
+    transform: rotate(-3deg); /* Rotación para el efecto de post-it */
+}
+
+/* Efecto de pin */
+.alert::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* Posición del pin */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 15px;
+    background-color: #28a745; /* Color del pin */
+    border-radius: 50%; /* Forma circular */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para el pin */
+    z-index: 20; /* Asegura que el pin esté encima del post-it */
+}
+
+/* Efecto de cinta */
+.alert::after {
+    content: '';
+    position: absolute;
+    top: -5px; /* Posición de la cinta */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 10px;
+    background-color: #f5e79e; /* Color de la cinta */
+    z-index: 15; /* Asegura que la cinta esté detrás del pin */
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%); /* Forma de cinta */
+}
+        .alert-left {
+            left: 265px; /* Posición a la izquierda del contenedor */
+            transform: rotate(-3deg);
+        }
+
+        .alert-right {
+            right: 270px; /* Posición a la derecha del contenedor */
+            transform: rotate(3deg);
+        }
+
+        /* Posiciones específicas para cada alerta */
+        .alert-left:nth-child(1) {
+            top: 50px; /* Primera alerta a la izquierda */
+        }
+
+        .alert-right:nth-child(2) {
+            top: 50px; /* Primera alerta a la derecha */
+        }
+
+        .alert-left:nth-child(3) {
+            top: 165px; /* Segunda alerta a la izquierda */
+        }
+
+        .alert-right:nth-child(4) {
+            top: 150px; /* Segunda alerta a la derecha */
+        }
+
+        @media (max-width: 768px) {
+            .alert-left, .alert-right {
+                position: static; /* Cambia a posición normal en pantallas pequeñas */
+                margin: 10px auto; /* Centra las alertas */
+                transform: none; /* Elimina la rotación */
+                width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+            }
         }
         footer { text-align: center; margin-top: 20px; font-size: 0.9em; color: #555; }
         footer a { color: #007bff; text-decoration: none; }
@@ -197,10 +265,10 @@ HTML_TEMPLATE = """
     <div class="alert alert-info alert-right">
         <strong>ATENCIÓN:</strong> Este sitio no utiliza cookies ni guarda ningún dato. Es un sitio de solo lectura.
     </div>
-    <div class="alert alert-info alert-left2">
+    <div class="alert alert-info alert-left">
         <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con billeteras virtuales (CVU) como Mercado Pago, Ualá, etc.
     </div>
-    <div class="alert alert-info alert-right2">
+    <div class="alert alert-info alert-right">
         <strong>ATENCIÓN:</strong>  Esta herramienta no puede utilizarse con cuentas de criptomonedas.
     </div>
     <div class="container">
