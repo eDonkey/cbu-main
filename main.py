@@ -176,18 +176,9 @@ HTML_TEMPLATE = """
 </html>
 """
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
-    error = None
-    resultado = None
-    if request.method == 'POST':
-        cbu = request.form.get('cbu', '').strip()
-        try:
-            data = decodificar_cbu(cbu)
-            resultado = json.dumps(data, indent=4, ensure_ascii=False)
-        except ValueError as e:
-            error = str(e)
-    return render_template_string(HTML_TEMPLATE, error=error, resultado=resultado)
+    return render_template_string(HTML_TEMPLATE)
 
 # Swagger Model for API Input
 cbu_model = api.model('CBU', {
