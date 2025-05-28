@@ -1,9 +1,8 @@
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, redirect, request, jsonify, render_template_string, url_for
 from flask_restx import Api, Resource, fields
 import json
 
 app = Flask(__name__)
-api = Api(app, title="Decodificador de CBU API", description="API para decodificar CBU", doc="/api/docs")
 
 CODIGOS_ENTIDAD = {
     '005': 'The Royal Bank of Scotland N.V.',
@@ -175,7 +174,8 @@ HTML_TEMPLATE = """
 </body>
 </html>
 """
-@app.route('/index', methods=['GET', 'POST'])
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
     error = None
     resultado = None
@@ -188,30 +188,29 @@ def index():
             error = str(e)
     return render_template_string(HTML_TEMPLATE, error=error, resultado=resultado)
 
-# @app.route('/', methods=['GET'])
-# def index():
-#     print("Accediendo a la página principal")
-#     return render_template_string(HTML_TEMPLATE, error=error, resultado=resultado)
-
-# Swagger Model for API Input
-cbu_model = api.model('CBU', {
-    'cbu': fields.String(required=True, description='CBU de 22 dígitos')
-})
-
-@api.route('/api/decodificar')
-class DecodificarCBU(Resource):
-    @api.expect(cbu_model)
-    @api.response(200, 'CBU decodificado correctamente')
-    @api.response(400, 'Error en la decodificación')
-    def post(self):
+@app.route('/api/decodificar', methods=['POST'])
+def decode():
+    try:
+        # Parse JSON request
         data = request.get_json()
         if not data or 'cbu' not in data:
-            return {"error": "Se requiere el campo 'cbu'"}, 400
-        try:
-            resultado = decodificar_cbu(data['cbu'])
-            return resultado, 200
-        except ValueError as e:
-            return {"error": str(e)}, 400
+            return jsonify({"error": "Se requiere el campo 'cbu' en el cuerpo de la solicitud"}), 400
+
+        cbu = data['cbu'].strip()
+        if not cbu.isdigit() or len(cbu) != 22:
+            return jsonify({"error": "La CBU debe tener exactamente 22 dígitos numéricos"}), 400
+
+        # Decode the CBU
+        resultado = decodificar_cbu(cbu)
+        return jsonify(resultado), 200
+
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
+    except Exception as e:
+        return jsonify({"error": "Ocurrió un error inesperado"}), 500
+
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
