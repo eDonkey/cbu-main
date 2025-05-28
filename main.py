@@ -140,10 +140,12 @@ HTML_TEMPLATE = """
 <html>
 <head>
     <title>Decodificador de CBU</title>
+    <link rel="icon" type="image/png" href="/static/images/logo.png"> <!-- Favicon -->
     <style>
         body { font-family: Arial; padding: 40px; background: #f4f4f4; }
         .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         h1 { text-align: center; }
+        .logo { display: block; margin: 0 auto 20px; max-width: 230px; }
         input[type=text] { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
         button { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
         .result { margin-top: 20px; }
@@ -161,18 +163,10 @@ HTML_TEMPLATE = """
 </head>
 <body>
     <div class="container">
+        <img src="/static/images/logo.png" alt="Logo InfoCBU" class="logo"> <!-- Logo -->
         <h1>Decodificador de CBU</h1>
         <div class="alert alert-info">
             <strong>ATENCIÓN:</strong> Esta herramienta es solo para fines educativos y no debe usarse para realizar transacciones financieras.
-        </div>
-         <div class="alert alert-info">
-            <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con billeteras virtuales (CVU) como Mercado Pago, Ualá, etc.
-        </div>
-        <div class="alert alert-info">
-            <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con cuentas de criptomonedas.
-        </div>
-        <div class="alert alert-info">
-            <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con cuentas de bancos extranjeros (No Argentinos).
         </div>
         <div class="alert alert-info">
             <strong>ATENCIÓN:</strong> Este sitio no utiliza cookies ni guarda ningún dato. Es un sitio de solo lectura.
@@ -217,7 +211,7 @@ HTML_TEMPLATE = """
         {% endif %}
     </div>
     <footer>
-        <p>Copyleft &copy; 2025 - Este proyecto es de uso libre. <a href="https://github.com/eDonkey/cbu-main">Github Readme</a></p>
+        <p>Copyleft &copy; 2025 - v1.1.0 Este proyecto es de uso libre. <a href="https://github.com/eDonkey/cbu-main/issues">Feedback</a> - <a href="https://github.com/eDonkey/cbu-main/blob/main/README.md">Github Readme</a></p>
     </footer>
 </body>
 </html>
