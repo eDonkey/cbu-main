@@ -169,7 +169,7 @@ HTML_TEMPLATE = """
         {% if resultado %}<div class="result"><h2>Resultado</h2><pre>{{ resultado }}</pre></div>{% endif %}
     </div>
     <footer>
-        <p>Copyleft &copy; 2025 - Este proyecto es de uso libre. <a href="/api/docs">API Swagger</a></p>
+        <p>Copyleft &copy; 2025 - Este proyecto es de uso libre. <a href="https://github.com/eDonkey/cbu-main">Github Readme</a></p>
     </footer>
 </body>
 </html>
