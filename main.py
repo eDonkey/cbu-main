@@ -207,14 +207,14 @@ HTML_TEMPLATE = """
                     <td>Cuenta</td>
                     <td>{{ resultado['cuenta'] }}</td>
                 </tr>
-                <tr>
-                    <td>Dígito Verificador Bloque 1</td>
-                    <td>{{ resultado['digitos_verificadores']['bloque1'] }}</td>
-                </tr>
-                <tr>
-                    <td>Dígito Verificador Bloque 2</td>
-                    <td>{{ resultado['digitos_verificadores']['bloque2'] }}</td>
-                </tr>
+                # <tr>
+                #     <td>Dígito Verificador Bloque 1</td>
+                #     <td>{{ resultado['digitos_verificadores']['bloque1'] }}</td>
+                # </tr>
+                # <tr>
+                #     <td>Dígito Verificador Bloque 2</td>
+                #     <td>{{ resultado['digitos_verificadores']['bloque2'] }}</td>
+                # </tr>
             </table>
         </div>
         {% endif %}
