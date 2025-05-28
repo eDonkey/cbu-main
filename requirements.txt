@@ -1,1 +1,2 @@
 Flask==2.3.2
+uvicorn[standard]==0.22.0
