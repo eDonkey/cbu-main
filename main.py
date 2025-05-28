@@ -176,12 +176,15 @@ HTML_TEMPLATE = """
         table, th, td { border: 1px solid #ccc; }
         th, td { padding: 10px; text-align: left; }
         th { background-color: #f4f4f4; }
-        .alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 5px; width: 200px; position: absolute; z-index: 0; }
-        .alert-info { background-color: #fff8b5; border-color: #f5e79e; color: #856404; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transform: rotate(-3deg); }
-        .alert-left { top: 50px; left: 200px; }
-        .alert-right { top: 150px; right: 200px; transform: rotate(3deg); }
-        .alert-left2 { top: 200px; left: 200px; }
-        .alert-right2 { top: 276px; right: 200px; transform: rotate(-6deg); }
+        .alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 5px; width: 90%; max-width: 300px; position: relative; margin-left: auto; margin-right: auto; z-index: 0; }
+        .alert-info { background-color: #fff8b5; border-color: #f5e79e; color: #856404; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transform: none; }
+        .alert-left, .alert-right, .alert-left2, .alert-right2 { top: auto; left: auto; right: auto; transform: none; }
+        @media (min-width: 768px) {
+            .alert-left { margin-left: 10%; }
+            .alert-right { margin-right: 10%; }
+            .alert-left2 { margin-left: 15%; }
+            .alert-right2 { margin-right: 15%; }
+        }
         footer { text-align: center; margin-top: 20px; font-size: 0.9em; color: #555; }
         footer a { color: #007bff; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
