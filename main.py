@@ -168,6 +168,15 @@ HTML_TEMPLATE = """
         <div class="alert alert-info">
             <strong>ATENCIÓN:</strong> Esta herramienta es solo para fines educativos y no debe usarse para realizar transacciones financieras.
         </div>
+         <div class="alert alert-info">
+            <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con billeteras virtuales (CVU) como Mercado Pago, Ualá, etc.
+        </div>
+        <div class="alert alert-info">
+            <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con cuentas de criptomonedas.
+        </div>
+        <div class="alert alert-info">
+            <strong>ATENCIÓN:</strong> Esta herramienta no puede utilizarse con cuentas de bancos extranjeros (No Argentinos).
+        </div>
         <div class="alert alert-info">
             <strong>ATENCIÓN:</strong> Este sitio no utiliza cookies ni guarda ningún dato. Es un sitio de solo lectura.
         </div>
