@@ -361,7 +361,7 @@ HTML_TEMPLATE = """
         {% endif %}
     </div>
     <footer>
-        <p>Copyleft &copy; 2025 - v1.3.1 Este proyecto es de uso libre. <a href="https://github.com/eDonkey/cbu-main/issues">Feedback</a> - <a href="https://github.com/eDonkey/cbu-main/blob/main/README.md">Github Readme</a></p>
+        <p>Copyleft &copy; 2025 - v1.3.2 Este proyecto es de uso libre. <a href="https://github.com/eDonkey/cbu-main/issues">Feedback</a> - <a href="https://github.com/eDonkey/cbu-main/blob/main/README.md">Github Readme</a></p>
     </footer>
 </body>
 </html>
