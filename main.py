@@ -257,6 +257,14 @@ HTML_TEMPLATE = """
         footer a { color: #007bff; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
     </style>
+        <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RRM4GQCXRG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
 </head>
 <body>
     <div class="alert alert-info alert-left">
