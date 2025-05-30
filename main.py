@@ -280,6 +280,22 @@ HTML_TEMPLATE = """
         gtag('js', new Date());
         gtag('config', 'G-RRM4GQCXRG');
     </script>
+    <script>
+    document.getElementById('convert-cbu-button').addEventListener('click', function() {
+        gtag('event', 'convert_cbu', {
+            'event_category': 'CBU',
+            'event_label': 'Decodificar CBU',
+            'value': 1
+        });
+    });
+        document.getElementById('generate-cbu-button').addEventListener('click', function() {
+        gtag('event', 'generate_cbu', {
+            'event_category': 'CBU',
+            'event_label': 'Generar CBU',
+            'value': 1
+        });
+    });
+    </script>
 </head>
 <body>
     <div class="alert alert-info alert-left">
@@ -302,7 +318,7 @@ HTML_TEMPLATE = """
         <h2>Decodificar CBU</h2>
         <form method="POST" action="/">
             <input type="text" name="cbu" placeholder="Ingrese su CBU" required maxlength="22">
-            <button type="submit">Decodificar</button>
+            <button id="convert-cbu-button" type="submit">Decodificar</button>
         </form>
         {% if error %}
         <div class="error">{{ error }}</div>
@@ -351,7 +367,7 @@ HTML_TEMPLATE = """
             </select>
             <input type="text" name="sucursal" placeholder="Ingrese el código de sucursal (4 dígitos)" required maxlength="4">
             <input type="text" name="cuenta" placeholder="Ingrese el número de cuenta (13 dígitos)" required maxlength="13">
-            <button type="submit">Construir CBU</button>
+            <button id="generate-cbu-button"  type="submit">Construir CBU</button>
         </form>
         {% if cbu_construido %}
         <div class="result">
