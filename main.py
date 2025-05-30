@@ -163,6 +163,21 @@ HTML_TEMPLATE = """
 <head>
     <title>Decodificador y Constructor de CBU</title>
     <link rel="icon" type="image/png" href="/static/images/logo.png"> <!-- Favicon -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Decodificador y Constructor de CBU: Herramienta educativa para decodificar y construir CBU en Argentina. Fácil, rápido y seguro.">
+    <meta name="keywords" content="CBU, Decodificador CBU, Constructor CBU, Argentina, Banco, Sucursal, Número de Cuenta, Herramienta Educativa">
+    <meta name="author" content="InfoCBU">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Decodificador y Constructor de CBU">
+    <meta property="og:description" content="Herramienta educativa para decodificar y construir CBU en Argentina. Fácil, rápido y seguro.">
+    <meta property="og:image" content="/static/images/logo.png">
+    <meta property="og:url" content="https://infocbu.com.ar">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Decodificador y Constructor de CBU">
+    <meta name="twitter:description" content="Herramienta educativa para decodificar y construir CBU en Argentina. Fácil, rápido y seguro.">
+    <meta name="twitter:image" content="/static/images/logo.png">
     <style>
         body { font-family: Arial; padding: 40px; background: #f4f4f4; position: relative; }
         .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative; z-index: 1; }
