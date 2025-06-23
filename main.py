@@ -459,6 +459,41 @@ textarea {
     });
     </script>
     <script src="https://www.google.com/recaptcha/api.js?render=6LdSLWsrAAAAAEo83e5TqZaQ6LKdJIlcRM5ijO3Z"></script>
+    <script>
+    // Log when the reCAPTCHA script is loaded
+    console.log("reCAPTCHA script loaded");
+
+    // Log when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOM fully loaded and parsed");
+
+        // Check if the reCAPTCHA element exists
+        const captchaElement = document.querySelector('.g-recaptcha');
+        if (captchaElement) {
+            console.log("reCAPTCHA element found");
+        } else {
+            console.error("reCAPTCHA element not found");
+        }
+    });
+
+    // Log when the form is submitted
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        console.log("Form submitted");
+        const comment = document.getElementById('comment').value;
+        const rating = document.querySelector('input[name="rating"]:checked')?.value;
+        console.log("Comment:", comment);
+        console.log("Rating:", rating);
+
+        // Check if the reCAPTCHA response is present
+        const captchaResponse = document.querySelector('textarea[name="g-recaptcha-response"]');
+        if (captchaResponse && captchaResponse.value) {
+            console.log("reCAPTCHA response:", captchaResponse.value);
+        } else {
+            console.error("reCAPTCHA response not found or empty");
+        }
+    });
+</script>
 <script>
     grecaptcha.ready(function() {
         grecaptcha.execute('6LdSLWsrAAAAAEo83e5TqZaQ6LKdJIlcRM5ijO3Z', {action: 'submit'}).then(function(token) {
