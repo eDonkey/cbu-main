@@ -1,9 +1,13 @@
-from flask import Flask, redirect, request, jsonify, render_template_string, url_for
+from flask import Flask, redirect, request, jsonify, render_template_string, url_for, make_response
 from flask_restx import Api, Resource, fields
 import json
 import requests
+import os
 
 app = Flask(__name__)
+
+# File to store comments
+COMMENTS_FILE = "comments.txt"
 
 CODIGOS_ENTIDAD = {
     '005': 'The Royal Bank of Scotland N.V.',
@@ -579,11 +583,15 @@ def submit_comment():
     if not captcha_result.get('success'):
         return "CAPTCHA verification failed. Please try again.", 400
 
-    # Save the comment and rating (e.g., to a database or file)
-    # For demonstration, just print them
-    print(f"Comment: {comment}, Rating: {rating}")
+    # Save the comment and rating to a file
+    with open(COMMENTS_FILE, 'a') as file:
+        file.write(f"Comment: {comment}, Rating: {rating}\n")
 
-    return "Thank you for your feedback!", 200
+    # Set a cookie to prevent multiple comments
+    response = make_response("Thank you for your feedback!")
+    response.set_cookie('has_commented', 'true', max_age=60*60*24)  # Cookie expires in 1 day
+
+    return response
 
 if __name__ == '__main__':
     app.run(debug=False)
