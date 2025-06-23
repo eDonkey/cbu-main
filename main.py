@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 # File to store comments
-COMMENTS_FILE = "comments.txt"
+COMMENTS_FILE = "commentss.txt"
 
 CODIGOS_ENTIDAD = {
     '005': 'The Royal Bank of Scotland N.V.',
