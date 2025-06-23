@@ -458,6 +458,16 @@ textarea {
         });
     });
     </script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdSLWsrAAAAAEo83e5TqZaQ6LKdJIlcRM5ijO3Z"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LdSLWsrAAAAAEo83e5TqZaQ6LKdJIlcRM5ijO3Z', {action: 'submit'}).then(function(token) {
+            // Add the token to a hidden input field in your form
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+</script>
+<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
