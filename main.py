@@ -432,7 +432,7 @@ textarea {
             <!-- CAPTCHA -->
             <div class="captcha">
                 <label for="captcha">Por favor, completa el CAPTCHA:</label>
-                <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+                <div class="g-recaptcha" data-sitekey="6LdSLWsrAAAAAEo83e5TqZaQ6LKdJIlcRM5ijO3Z"></div>
             </div>
 
             <!-- Submit Button -->
