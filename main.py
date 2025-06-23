@@ -1,6 +1,7 @@
 from flask import Flask, redirect, request, jsonify, render_template_string, url_for
 from flask_restx import Api, Resource, fields
 import json
+import requests
 
 app = Flask(__name__)
 
@@ -231,7 +232,6 @@ HTML_TEMPLATE = """
     height: 10px;
     background-color: #f5e79e; /* Color de la cinta */
     z-index: 15; /* Asegura que la cinta esté detrás del pin */
-    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%); /* Forma de cinta */
 }
         .alert-left {
             left: 265px; /* Posición a la izquierda del contenedor */
@@ -271,6 +271,53 @@ HTML_TEMPLATE = """
         footer { text-align: center; margin-top: 20px; font-size: 0.9em; color: #555; }
         footer a { color: #007bff; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
+
+        /* Form Styling */
+form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 2em;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.rating input:checked ~ label {
+    color: #ffc700;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #ffc700;
+}
+
+.captcha {
+    margin: 20px 0;
+}
     </style>
         <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RRM4GQCXRG"></script>
@@ -359,6 +406,38 @@ HTML_TEMPLATE = """
             <div class="cbu-box">{{ cbu_construido }}</div>
         </div>
         {% endif %}
+
+        <!-- Sección de comentarios -->
+        <h2>Deja tu comentario</h2>
+        <form method="POST" action="/submit-comment">
+            <!-- Comment Field -->
+            <label for="comment">Comentario:</label>
+            <textarea id="comment" name="comment" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
+
+            <!-- 5-Star Rating System -->
+            <label for="rating">Calificación:</label>
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5" required>
+                <label for="star5" title="5 estrellas">★</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4" title="4 estrellas">★</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3" title="3 estrellas">★</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2" title="2 estrellas">★</label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1" title="1 estrella">★</label>
+            </div>
+
+            <!-- CAPTCHA -->
+            <div class="captcha">
+                <label for="captcha">Por favor, completa el CAPTCHA:</label>
+                <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Enviar</button>
+        </form>
     </div>
     <footer>
         <p>Copyleft &copy; 2025 - v1.3.2 Este proyecto es de uso libre. <a href="https://github.com/eDonkey/cbu-main/issues">Feedback</a> - <a href="https://github.com/eDonkey/cbu-main/blob/main/README.md">Github Readme</a></p>
@@ -379,6 +458,7 @@ HTML_TEMPLATE = """
         });
     });
     </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
 """
@@ -435,6 +515,30 @@ def construir():
         error = str(e)
 
     return render_template_string(HTML_TEMPLATE, bancos=bancos, cbu_construido=cbu_construido, error=error)
+
+@app.route('/submit-comment', methods=['POST'])
+def submit_comment():
+    comment = request.form.get('comment')
+    rating = request.form.get('rating')
+    captcha_response = request.form.get('g-recaptcha-response')
+
+    # Verify CAPTCHA
+    captcha_secret = "6LdSLWsrAAAAADVERXl-NhFMByTuBP839kr9vcBg"
+    captcha_verify_url = "https://www.google.com/recaptcha/api/siteverify"
+    response = requests.post(captcha_verify_url, data={
+        'secret': captcha_secret,
+        'response': captcha_response
+    })
+    captcha_result = response.json()
+
+    if not captcha_result.get('success'):
+        return "CAPTCHA verification failed. Please try again.", 400
+
+    # Save the comment and rating (e.g., to a database or file)
+    # For demonstration, just print them
+    print(f"Comment: {comment}, Rating: {rating}")
+
+    return "Thank you for your feedback!", 200
 
 if __name__ == '__main__':
     app.run(debug=False)
