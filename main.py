@@ -410,38 +410,6 @@ textarea {
             <div class="cbu-box">{{ cbu_construido }}</div>
         </div>
         {% endif %}
-
-        <!-- Sección de comentarios -->
-        <h2>Deja tu comentario</h2>
-        <form method="POST" action="/submit-comment">
-            <!-- Comment Field -->
-            <label for="comment">Comentario:</label>
-            <textarea id="comment" name="comment" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
-
-            <!-- 5-Star Rating System -->
-            <label for="rating">Calificación:</label>
-            <div class="rating">
-                <input type="radio" id="star5" name="rating" value="5" required>
-                <label for="star5" title="5 estrellas">★</label>
-                <input type="radio" id="star4" name="rating" value="4">
-                <label for="star4" title="4 estrellas">★</label>
-                <input type="radio" id="star3" name="rating" value="3">
-                <label for="star3" title="3 estrellas">★</label>
-                <input type="radio" id="star2" name="rating" value="2">
-                <label for="star2" title="2 estrellas">★</label>
-                <input type="radio" id="star1" name="rating" value="1">
-                <label for="star1" title="1 estrella">★</label>
-            </div>
-
-            <!-- CAPTCHA -->
-            <div class="captcha">
-                <label for="captcha">Por favor, completa el CAPTCHA:</label>
-                <div class="g-recaptcha" data-sitekey="6LdSLWsrAAAAAEo83e5TqZaQ6LKdJIlcRM5ijO3Z"></div>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit">Enviar</button>
-        </form>
     </div>
     <footer>
         <p>Copyleft &copy; 2025 - v1.3.2 Este proyecto es de uso libre. <a href="https://github.com/eDonkey/cbu-main/issues">Feedback</a> - <a href="https://github.com/eDonkey/cbu-main/blob/main/README.md">Github Readme</a></p>
